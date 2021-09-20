@@ -1,5 +1,6 @@
 import './App.css';
-import MySelect from './UI/select/MySelect';
+import MySelects from './selects/MySelects';
+
 
 
 
@@ -8,13 +9,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<MySelect 
-				options={[
-					{value: "pov-otkid", name: "Поворотно откидное"},
-					{value: "pov", name: "Поворотное"},
-					{value: "fram", name: "Фрамуга"}
-				]}
-			/>
+			<MySelects/>
 		</div>
 	);
 }
