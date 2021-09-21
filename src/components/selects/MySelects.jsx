@@ -7,7 +7,7 @@ const MySelects = () => {
 
 	const sortSiegenia = (sort) => {
 		console.log(sort);
-		// setSelected(sort);
+		setSelected(sort)
 	}
 
     return (
