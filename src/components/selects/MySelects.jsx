@@ -1,10 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import MySelect from '../UI/select/MySelect';
 
 const MySelects = () => {
+
+	const [selected, setSelected] = useState("");
+
+	const sortSiegenia = (sort) => {
+		console.log(sort);
+		// setSelected(sort);
+	}
+
     return (
         <div>
             <MySelect 
+				value={selected}
+				onChange={sortSiegenia}
+				defaultValue="Выбор открывания"
 				options={[
 					{value: "pov-otkid", name: "Поворотно откидное"},
 					{value: "pov", name: "Поворотное"},
