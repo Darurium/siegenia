@@ -1,15 +1,17 @@
 import React from 'react';
+import "./MySelect.scss";
 
-const MySelect = ({defaultValue, options, value, onChange}) => {
+const MySelect = ({options, defaultValue, value, onChange}) => {
 
     return (
         <select 
+            className="my-select"
             value={value}
             onChange={(event) => onChange(event.target.value)}
         >
-            <option disabled value="">{defaultValue}</option>
+            {/* <option disabled value="">{defaultValue}</option> */}
             {options.map(item => 
-                <option value={item.name} key={item.value}>
+                <option value={item.value} key={item.value}>
                     {item.name}
                 </option>
             )}
