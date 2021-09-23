@@ -27,25 +27,29 @@ function App() {
 
 	const [currentValues, setCurrentValues] = useState([]);
 
+	const zap = [];
+
 	const addValues = (selected) => {
-		// выбор запоров
+		
 		for (let i = 0; i < PRIVOD.length; i++) {
 			if (PRIVOD[i].opening === selected.opening
 				&& selected.height >= PRIVOD[i].min
 				&& selected.height <= PRIVOD[i].max
 				&& PRIVOD[i].position === selected.position) {		
 					const privod = PRIVOD[i];
-					// privod.quantity = privod.quantity + selected.quantity;
-					for (let j = 0; j < currentValues.length; j++) {
-						if (currentValues[j].id === privod.id){
-							setCurrentValues(currentValues[j].quantity += selected.quantity)
+					zap.push(privod);
+					for (let j = 0; j < zap.length; j++) {
+						if (zap[j].id === privod.id) {
+							zap[j].quantity += selected.quantity 
 						} else {
-							setCurrentValues([...currentValues, privod])
+							zap[j].push(privod)
 						}
-					}
-									
+						console.log(zap)
+					}													
 			}
+
 		}
+		setCurrentValues(zap);
 	}
 
 		return (
