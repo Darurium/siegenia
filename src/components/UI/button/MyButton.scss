@@ -1,0 +1,11 @@
+.my-button {
+    padding: 5px 25px;
+    margin-top: 20px;
+    width: 200px;
+    cursor: pointer;
+    color: teal;
+    border: 2px solid teal;
+    &:hover {
+        transform: scale(1.01);
+    }
+}

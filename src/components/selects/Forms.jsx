@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import MySelect from '../UI/select/MySelect';
 import MyInput from '../UI/input/MyInput';
-import "./MySelects.scss";
+import "./Forms.scss";
+import MyButton from '../UI/button/MyButton';
 
-const MySelects = () => {
+const Forms = ({addValues}) => {
 
 	const [selected, setSelected] = useState({
 		opening: "pov-otkid",
@@ -16,7 +17,6 @@ const MySelects = () => {
 		width: 550
 	});
 
-	console.log("2", selected);
 
 	const openingValue = (val) => {
 		console.log("1", val);
@@ -109,8 +109,12 @@ const MySelects = () => {
 				type="number"
 			/>
 
+			<MyButton
+				onClick={() => addValues(selected)}
+				name="Добавить"
+			/>
         </div>
     );
 };
 
-export default MySelects;
+export default Forms;
