@@ -51,7 +51,7 @@ const Forms = ({addValues}) => {
 				value={selected.opening}
 				onChange={openingValue}	
 				options={[
-					{value: "pov-otkid", name: "Поворотно откидное"},
+					{value: "pov-otkid", name: "Поворотно-откидное"},
 					{value: "pov", name: "Поворотное"},
 					{value: "fram", name: "Фрамуга"}
 				]}
