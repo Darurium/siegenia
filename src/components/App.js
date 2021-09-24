@@ -22,16 +22,11 @@ const PRIVOD = [
 // 	width: 550
 // };
 
-
-
-
 function App() {
 
 	const [currentValues, setCurrentValues] = useState([]);
 
-	let zap = currentValues;
-	console.log("Инициализация", zap)
-
+	let zap = [...currentValues]
 
 	const addValues = (selected) => {
 		console.log(selected);
@@ -39,40 +34,40 @@ function App() {
 			if (PRIVOD[i].opening === selected.opening
 				&& selected.height >= PRIVOD[i].min
 				&& selected.height <= PRIVOD[i].max
-				&& PRIVOD[i].position === selected.position) {		
-					let privod = PRIVOD[i];
+				&& PRIVOD[i].position === selected.position) {
+					let privod = JSON.parse(JSON.stringify(PRIVOD[i]))
+					privod.quantity = selected.quantity;
 					if (zap.length === 0) {
-						zap.push(PRIVOD[i])
+						zap = [...zap, privod];
+					} else {
+						zap.map(item => {
+							if (item.id === privod.id) {
+								return item.quantity += privod.quantity
+							} else {
+								return privod;
+							}
+							
+						})
 					}
-					console.log("privod до пробега по ZAP", privod)
-					console.log("Длина zap", zap.length)
-					for (let j = 0; j < zap.length; j++) {
-						if (zap[j].id === privod.id) {
-							zap[j].quantity += selected.quantity 
-						} else {
-							zap.push(privod)
-						}
-						
-					}	
-					console.log("zap после пробега по zap", zap)												
+					
+				}
+															
 			}
-			
-		}
 		setCurrentValues(zap);
-		console.log("текущий стейт",currentValues)
 	}
-		
 
-		return (
-		<div className="App">
+	return (
+		<div className="app">
 			<Forms addValues={addValues}/>
-			{currentValues.map((item, index) => 
-				<div key={index}>
-					<span>{item.id} +++</span>				
-					<span>{item.name} ---</span>				
-					<span>{item.quantity} шт</span>		
-				</div>		
-				)}
+			<div  className="items">
+				{currentValues.map((item, index) => 
+					<div key={index}>
+						<span>{item.id} +++</span>				
+						<span>{item.name} ---</span>				
+						<span>{item.quantity} шт</span>		
+					</div>		
+					)}
+			</div>
 		</div>
 	);
 }

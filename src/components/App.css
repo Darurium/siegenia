@@ -1,3 +1,14 @@
 * {
     box-sizing: border-box;
 }
+
+.app {
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+}
