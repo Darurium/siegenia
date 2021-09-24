@@ -1,6 +1,6 @@
 import './App.css';
 import Forms from './selects/Forms';
-import {useState, useEffect} from "react";
+import {useState} from "react";
 
 const PRIVOD = [
 	{id: "FGMK4010-100040", name: "Привод пов/откидной центр 461-600мм", min: 461, max: 600, opening: "pov-otkid", position: "center", capfa: 0, quantity: 0},
@@ -23,42 +23,53 @@ const PRIVOD = [
 // };
 
 
+
+
 function App() {
 
 	const [currentValues, setCurrentValues] = useState([]);
 
-	const zap = [];
+	let zap = currentValues;
+	console.log("Инициализация", zap)
+
 
 	const addValues = (selected) => {
-		
+		console.log(selected);
 		for (let i = 0; i < PRIVOD.length; i++) {
 			if (PRIVOD[i].opening === selected.opening
 				&& selected.height >= PRIVOD[i].min
 				&& selected.height <= PRIVOD[i].max
 				&& PRIVOD[i].position === selected.position) {		
-					const privod = PRIVOD[i];
-					zap.push(privod);
+					let privod = PRIVOD[i];
+					if (zap.length === 0) {
+						zap.push(PRIVOD[i])
+					}
+					console.log("privod до пробега по ZAP", privod)
+					console.log("Длина zap", zap.length)
 					for (let j = 0; j < zap.length; j++) {
 						if (zap[j].id === privod.id) {
 							zap[j].quantity += selected.quantity 
 						} else {
-							zap[j].push(privod)
+							zap.push(privod)
 						}
-						console.log(zap)
-					}													
+						
+					}	
+					console.log("zap после пробега по zap", zap)												
 			}
-
+			
 		}
 		setCurrentValues(zap);
+		console.log("текущий стейт",currentValues)
 	}
+		
 
 		return (
 		<div className="App">
 			<Forms addValues={addValues}/>
 			{currentValues.map((item, index) => 
 				<div key={index}>
-					<span>{item.id} </span>				
-					<span>{item.name} </span>				
+					<span>{item.id} +++</span>				
+					<span>{item.name} ---</span>				
 					<span>{item.quantity} шт</span>		
 				</div>		
 				)}
