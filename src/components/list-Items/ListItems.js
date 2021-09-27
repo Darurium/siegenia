@@ -5,7 +5,7 @@ const ListItems = ({currentValues}) => {
         <div>
             {currentValues.map((item, index) => 
 					<div key={index}>
-						<span>{item.id} +++</span>				
+						<span>{item.articule} +++</span>				
 						<span>{item.name} ---</span>				
 						<span>{item.quantity} шт</span>		
 					</div>		
