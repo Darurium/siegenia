@@ -1,16 +1,30 @@
 import React from 'react';
+import { Table } from 'react-bootstrap';
 
-const ListItems = ({currentValues}) => {
+const ListItems = (props) => {
     return (
-        <div>
-            {currentValues.map((item, index) => 
-					<div key={index}>
-						<span>{item.articule} +++</span>				
-						<span>{item.name} ---</span>				
-						<span>{item.quantity} шт</span>		
-					</div>		
-					)}
-        </div>
+		<Table striped bordered hover size="sm">
+			<thead>
+				<tr>
+				<th>№</th>
+				<th>Артикул</th>
+				<th>Наименование</th>
+				<th>Количество</th>
+				</tr>
+			</thead>
+			<tbody>
+				{props.totalList.map((item, index) => 
+					<tr>
+						<td>{index}</td>
+						<td>{item.articule}</td>
+						<td>{item.name}</td>
+						<td>{item.quantity}</td>
+					</tr>
+				)}
+				
+				
+			</tbody>
+		</Table>
     );
 };
 

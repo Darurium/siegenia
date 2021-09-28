@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
+.app {   
+    width: 1000px;
+    margin: 0 auto;
+
+    &__form {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+
