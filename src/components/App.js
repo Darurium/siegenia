@@ -2,8 +2,8 @@ import './App.scss';
 import Forms from './selects/Forms';
 import {useState} from "react";
 import ListItems from './list-Items/ListItems';
-import MyButton from './UI/button/MyButton';
-import {addPrivod} from "../utils/addPrivod";
+// import MyButton from './UI/button/MyButton';
+
 
 
 
@@ -29,27 +29,54 @@ function App() {
 		{id: 17, articule: "FGMD4110-100040", name: "Поворотный привод 2200-2400мм",        min: 2201,  max: 2400, opening: "pov",       position: "center", capfa: 4, quantity: 1}
 	]
 
-	const [currentValues, setCurrentValues] = useState([]);		
-	const [totalList, setTotalList] = useState([]);
+	const schereList = [
+		{articule: "FSKK2010-100040", name: "Ножницы 290-625мм р.30 TS",   min: 290,  max: 625,  opening: "pov-otkid", capfa: 0, quantity: 1},
+		{articule: "FSKK2020-100040", name: "Ножницы 571-800мм р.35 TS",   min: 626,  max: 800,  opening: "pov-otkid", capfa: 1, quantity: 1},
+		{articule: "FSKK2030-100040", name: "Ножницы 800-1030мм р.50 MV",   min: 801,  max: 1030,  opening: "pov-otkid", capfa: 1, quantity: 1},
+		{articule: "FSKK2040-100040", name: "Ножницы 1031-1260мм р.55 MV",   min: 1031,  max: 1260,  opening: "pov-otkid", capfa: 1, quantity: 1}
+
+	]
+
+	const [currentValues, setCurrentValues] = useState([]);
 
 	let zap = [...currentValues];
 	
-	const addValues = (selected) => { // selected - объект настроек для выбора привода (количество/высота)
-		zap = addPrivod(selected, privodList, zap);
-		setCurrentValues(zap);
-	}	
+	const addValues = (selected) => {
 
-	const total = (values) => {
-		const tempArray = [...values];
-		let array = [];
-		tempArray.forEach(item => {
-			let candidate = array.find((elem) => elem.articule === item.articule);
-			if (!candidate) {
-				return array.push(item);
-			}
-			candidate.quantity += item.quantity;
-		})
-		setTotalList(array);
+		for (let i = 0; i < privodList.length; i++) {
+			if (privodList[i].opening === selected.opening
+				&& selected.height >= privodList[i].min
+				&& selected.height <= privodList[i].max
+				&& privodList[i].position === selected.position
+				) {
+					const privod = {...privodList[i]};
+					privod.quantity = selected.quantity;
+					let candidate = zap.find((item) => item.articule === privod.articule);
+					if (!candidate) {
+						zap.push(privod);
+					} else {
+						candidate.quantity += privod.quantity;
+					}
+				}				
+		}	
+
+		for (let i = 0; i < schereList.length; i++) {
+			if (schereList[i].opening === selected.opening
+				&& selected.width >= schereList[i].min
+				&& selected.width <= schereList[i].max
+				) {
+					const schere = {...schereList[i]};
+					schere.quantity = selected.quantity;
+					let candidate = zap.find((item) => item.articule === schere.articule);
+					if (!candidate) {
+						zap.push(schere)
+					} else {
+						candidate.quantity += schere.quantity
+					}
+				}
+		}
+	
+		setCurrentValues(zap)
 	}
 
 	return (
@@ -57,9 +84,8 @@ function App() {
 			<div className="app">
 				<div className="app__form">
 					<Forms addValues={addValues}/>
-					<ListItems totalList={totalList}/>				
-				</div>	
-				<MyButton name="Итог" onClick={() => total(currentValues)}/ >
+					<ListItems currentValues={currentValues}/>				
+				</div>
 			</div>
 			
 		</>

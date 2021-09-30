@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 
-const ListItems = (props) => {
+const ListItems = ({currentValues}) => {
     return (
 		<Table striped bordered hover size="sm">
 			<thead>
@@ -13,9 +13,9 @@ const ListItems = (props) => {
 				</tr>
 			</thead>
 			<tbody>
-				{props.totalList.map((item, index) => 
-					<tr>
-						<td>{index}</td>
+				{currentValues.map((item, index) => 
+					<tr key={item.articule}>
+						<td>{index+1}</td>
 						<td>{item.articule}</td>
 						<td>{item.name}</td>
 						<td>{item.quantity}</td>
