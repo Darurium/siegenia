@@ -33,8 +33,35 @@ function App() {
 		{articule: "FSKK2010-100040", name: "Ножницы 290-625мм р.30 TS",   min: 290,  max: 625,  opening: "pov-otkid", capfa: 0, quantity: 1},
 		{articule: "FSKK2020-100040", name: "Ножницы 571-800мм р.35 TS",   min: 626,  max: 800,  opening: "pov-otkid", capfa: 1, quantity: 1},
 		{articule: "FSKK2030-100040", name: "Ножницы 800-1030мм р.50 MV",   min: 801,  max: 1030,  opening: "pov-otkid", capfa: 1, quantity: 1},
-		{articule: "FSKK2040-100040", name: "Ножницы 1031-1260мм р.55 MV",   min: 1031,  max: 1260,  opening: "pov-otkid", capfa: 1, quantity: 1}
+		{articule: "FSKK2040-100040", name: "Ножницы 1031-1260мм р.55 MV",   min: 1031,  max: 1260,  opening: "pov-otkid", capfa: 1, quantity: 1},
+		{articule: "FSKD1010-100040", name: "Ножницы 7 DF CLIP TS",   min: 290,  max: 1500,  opening: "pov", capfa: 0, quantity: 1}
+	]
 
+	const uglovoyList = [
+		{articule: "FEUL0500-100050", name: "Угловой переключатель VSO 1V TS",   min: 411,  max: 1500,  opening: "pov-otkid", capfa: 1, quantity: 1},
+		{articule: "FEUL0520-100050", name: "Угловой переключатель VSO  1V TS узкий",   min: 290,  max: 410,  opening: "pov-otkid", capfa: 1, quantity: 1},
+	]
+
+	const kochergaList = [
+		{articule: "FEUL2510-100040", name: "Передача угловая 801-1200мм BS р.50 1V TS",   min: 800,  max: 1100,  opening: "pov-otkid", capfa: 1, quantity: 1},
+		{articule: "FEUL2520-100040", name: "Передача угловая 1001-1400мм BS р.70 1V TS",   min: 1101,  max: 1400,  opening: "pov-otkid", capfa: 1, quantity: 1},
+		{articule: "FEUL2530-100040", name: "Передача угловая  1401-1920мм BS р.90 1V TS",   min: 1401,  max: 1800,  opening: "pov-otkid", capfa: 1, quantity: 1},
+		{articule: "FEUL2540-100040", name: "Передача угловая  BS р.130 2V TS",   min: 1801,  max: 2400,  opening: "pov-otkid", capfa: 2, quantity: 1}
+	]
+
+	const petliList = [
+		{articule: "704196", name: "S280010 Штифт верхней петли", quantity: 1},
+		{articule: "707616", name: "S707616 Петля на раме верхняя 100кг пластик", quantity: 1},
+		{articule: "TBEB6180-100060", name: "Петля нижняя на створке KF-D6X12/12 TS", quantity: 1},
+		{articule: "TBLB0010-100060", name: "Штифт опоры нижней петли", quantity: 1},
+	]
+
+	const dekorList = [
+		{articule: "833216", name: "S.FKEO0010-002060 Дек.накл.(белая) низ рама (верх) универсальная", color: "white", quantity: 1},
+		{articule: "833230", name: "S.FKEU0010-002060 Дек.накл.(белая) низ рама (низ) универсальная", color: "white", quantity: 1},
+		{articule: "834145", name: "S.FKSL0010-002060 Дек.накл.(белая) на раму верх универсальная", color: "white", quantity: 1},
+		{articule: "836194", name: "S.FKWB0010-002060 Дек.накл.(белая) верхняя на 'ухо' пластик", color: "white", quantity: 1},
+		{articule: "TKEB0020-002061", name: "TKEB0020-002061 Декоративная накладка EB белая нижняя петля створки", color: "white", quantity: 1}
 	]
 
 	const [currentValues, setCurrentValues] = useState([]);
@@ -75,8 +102,53 @@ function App() {
 					}
 				}
 		}
+
+		for (let i = 0; i < uglovoyList.length; i++) {
+			if (uglovoyList[i].opening === selected.opening
+				&& selected.width >= uglovoyList[i].min
+				&& selected.width <= uglovoyList[i].max
+				) {
+					const uglovoy = {...uglovoyList[i]};
+					uglovoy.quantity = selected.quantity;
+					let candidate = zap.find((item) => item.articule === uglovoy.articule);
+					if (!candidate) {
+						zap.push(uglovoy)
+					} else {
+						candidate.quantity += uglovoy.quantity
+					}
+				}
+		}
+
+		for (let i = 0; i < kochergaList.length; i++) {
+			if (kochergaList[i].opening === selected.opening
+				&& selected.height >= kochergaList[i].min
+				&& selected.height <= kochergaList[i].max
+				) {
+					const kocherga = {...kochergaList[i]};
+					kocherga.quantity = selected.quantity;
+					let candidate = zap.find((item) => item.articule === kocherga.articule);
+					if (!candidate) {
+						zap.push(kocherga)
+					} else {
+						candidate.quantity += kocherga.quantity
+					}
+				}
+		}
+
+		for (let i = 0; i < petliList.length; i++) {			
+			const petli = {...petliList[i]};
+			petli.quantity = selected.quantity;
+			let candidate = zap.find((item) => item.articule === petli.articule);
+			if (!candidate) {
+				zap.push(petli)
+			} else {
+				candidate.quantity += petli.quantity
+			}
+				
+		}
 	
 		setCurrentValues(zap)
+		
 	}
 
 	return (
@@ -93,3 +165,5 @@ function App() {
 }
 
 export default App;
+
+// dekorList
