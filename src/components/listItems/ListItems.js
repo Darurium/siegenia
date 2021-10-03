@@ -1,8 +1,14 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 
+import "./ListItems.scss";
+
 const ListItems = ({currentValues}) => {
+
+	let sortedList = currentValues.sort((a, b) => a.articule.localeCompare(b.articule))
+
     return (
+		<div className="items-list">
 		<Table striped bordered hover size="sm">
 			<thead>
 				<tr>
@@ -13,7 +19,7 @@ const ListItems = ({currentValues}) => {
 				</tr>
 			</thead>
 			<tbody>
-				{currentValues.map((item, index) => 
+				{sortedList.map((item, index) => 
 					<tr key={item.articule}>
 						<td>{index+1}</td>
 						<td>{item.articule}</td>
@@ -25,6 +31,7 @@ const ListItems = ({currentValues}) => {
 				
 			</tbody>
 		</Table>
+		</div>
     );
 };
 
