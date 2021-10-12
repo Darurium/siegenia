@@ -1,0 +1,18 @@
+.addList {
+    position: relative;
+    width: 100%;
+
+    &__descr {
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 120%;
+        color: #1E3240;
+        margin-top: 30px;
+    }
+
+    &__arrow_down {
+        position: absolute;
+        left: 283px;
+        top: 72px;
+    }
+}

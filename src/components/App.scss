@@ -1,8 +1,10 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.app {   
-    width: 1200px;
-    margin: 0 auto;
+.app {
+    min-height: 800px;
+    position: relative;
 }

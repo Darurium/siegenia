@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Forms from '../Forms/Forms';
 import ListItems from '../listItems/ListItems';
+import AddList from '../AddList/AddList';
 
 import "./Titan.scss";
 
@@ -257,8 +258,15 @@ const Titan = (props) => {
 	}
     return (
         <div className="titan">
-            <Forms addValues={addValues}/>
-			<ListItems currentValues={currentValues}/>	
+            <div className="titan__container">
+				<div className="titan__wrapper">
+					<Forms addValues={addValues}/>
+					{currentValues.length
+						? <ListItems currentValues={currentValues}/>
+						: <AddList title="Siegenia Titan"/>
+					}
+				</div>
+			</div>
         </div>
     );
 };

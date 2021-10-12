@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Forms from '../Forms/Forms';
 import ListItems from '../listItems/ListItems';
+import AddList from '../AddList/AddList';
 
 import "./Classic.scss";
 
@@ -54,14 +55,14 @@ const petliList = [
 ]
 
 const dekorList = [
-    {articule: "833216", name: "S.FKEO0010-002060 Дек.накл.(белая) низ рама (верх) универсальная", color: "white", quantity: 1},
-    {articule: "833230", name: "S.FKEU0010-002060 Дек.накл.(белая) низ рама (низ) универсальная", color: "white", quantity: 1},
-    {articule: "834145", name: "S.FKSL0010-002060 Дек.накл.(белая) на раму верх универсальная", color: "white", quantity: 1},
+    {articule: "833216", name: "S.FKEO0010-002060 Дек.накл.(белая) низ рама (верх)", color: "white", quantity: 1},
+    {articule: "833230", name: "S.FKEU0010-002060 Дек.накл.(белая) низ рама (низ)", color: "white", quantity: 1},
+    {articule: "834145", name: "S.FKSL0010-002060 Дек.накл.(белая) на раму верх", color: "white", quantity: 1},
     {articule: "836194", name: "S.FKWB0010-002060 Дек.накл.(белая) верхняя на 'ухо' пластик", color: "white", quantity: 1},
-    {articule: "TKEB0020-002061", name: "TKEB0020-002061 Декоративная накладка EB белая нижняя петля створки", color: "white", quantity: 1},
-    {articule: "833223", name: "S.FKEO0010-011080 Дек.накл.(коричневая) низ рама (верх) универсальная", color: "brown", quantity: 1},
-    {articule: "834855", name: "S228081 Дек.накл.(кор.) на раму верх универсальная. 100 кг", color: "brown", quantity: 1},
-    {articule: "836200", name: "S229866 Дек.накл.(коричневая) верхняя на 'ухо' пластик", color: "brown", quantity: 1},
+    {articule: "TKEB0020-002061", name: "Декоративная накладка EB белая нижняя петля створки", color: "white", quantity: 1},
+    {articule: "833223", name: "Дек.накл.(коричневая) низ рама (верх) универсальная", color: "brown", quantity: 1},
+    {articule: "834855", name: "Дек.накл.(кор.) на раму верх универсальная. 100 кг", color: "brown", quantity: 1},
+    {articule: "836200", name: "Дек.накл.(коричневая) верхняя на 'ухо' пластик", color: "brown", quantity: 1},
     {articule: "FKEU0010-011060", name: "Дек.накл .(коричневая 8019) низ рама (низ) универсальная 100 кг", color: "brown", quantity: 1},
     {articule: "TKEB0020-011061", name: "Декоративная накладка EB коричневая RAL8019 (нижняя петля створки)", color: "brown", quantity: 1}
 ]
@@ -262,10 +263,18 @@ const Classic = (props) => {
 	}
     return (
         <div className="classic">
-            <Forms addValues={addValues}/>
-			{currentValues.length ? <ListItems currentValues={currentValues}/> : "Добавте комплект"}
+           <div className="classic__container">
+			   <div className="classic__wrapper">
+					<Forms addValues={addValues}/>
+					{currentValues.length
+						? <ListItems currentValues={currentValues}/>
+						: <AddList title="Siegenia Classic"/>
+					}
+			   </div>
+		   </div>
         </div>
     );
 };
+
 
 export default Classic;
